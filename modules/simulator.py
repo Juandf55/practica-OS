@@ -438,6 +438,11 @@ class Simulator:
                 result['error'] = f"mount falló: {err}"
                 print(cprint("✗", C.RED))
                 return result
+            
+            # Dar permisos en ext2/ext4 (por defecto son de root tras el mount)
+            if name in ('ext2', 'ext4'):
+                run_cmd(f"sudo chmod 777 '{mount_dir}'")
+
             print(cprint("✓", C.GREEN))
 
             # 4. Copiar archivo

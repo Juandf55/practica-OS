@@ -1,22 +1,39 @@
-Tú nunca tocas ni modificas directamente el archivo .crypt. De hecho, tu sistema operativo y tus programas ni siquiera se enteran de que están trabajando con algo cifrado.
-
-Todo se hace a través de la carpeta punto_montaje de una forma totalmente transparente:
-
-Montas el disco con el comando de VeraCrypt y tu clave.
-
-Entras a la carpeta punto_montaje.
-
-Creas un archivo de texto, pegas una foto, o escribes un documento de Word ahí dentro de forma totalmente normal.
-
-La magia: En el milisegundo exacto en que tú guardas un archivo en esa carpeta, VeraCrypt (que está funcionando invisible en segundo plano) coge ese archivo, lo convierte en el código raro de "gt52rwedtrwe..." y lo inyecta dentro del bloque grande de mi_contenedor.crypt guardándolo en el disco duro.
-somonger explore /home/juan
-somonger nav /home/juan/
-somonger nav --dir /home/juan/
-somonger nav --rm /home/juan/archivo_prueba.txt
-somonger nav --touchDir /home/juan/nueva_carpeta
-somonger nav --mk /home/juan/nueva_carpeta
-somonger report /home/juan --output /home/juan/informe.csv
-somonger sim /media/sf_Practica/tuto.txt
-
-
-
+=========================================================
+ GUÍA DE PRUEBAS PARA EL EXAMEN - SOMONGER
+=========================================================
+Copia y pega estos comandos uno a uno en tu terminal.
+Recuerda cerrar la ventana del programa después de cada comando 
+para poder ejecutar el siguiente.
+0. PREPARACIÓN (Ve a la carpeta del proyecto)
+---------------------------------------------------------
+cd /media/sf_Practica/practica-OS
+1. MÓDULO 1 (Explorador)
+---------------------------------------------------------
+./somonger explore /home/juan
+2. MÓDULO 2 (Navegador y Gestión)
+---------------------------------------------------------
+# Abre el navegador normalmente
+./somonger nav /home/juan/
+# Crea una carpeta nueva
+./somonger nav --mk /home/juan/carpeta_examen
+# Copia un archivo a la carpeta nueva (asegúrate de tener un archivo_prueba.txt)
+./somonger nav --cc /home/juan/archivo_prueba.txt /home/juan/carpeta_examen/copia.txt
+# Mueve y renombra la copia
+./somonger nav --cv /home/juan/carpeta_examen/copia.txt /home/juan/movido.txt
+# Borra el archivo movido
+./somonger nav --rm /home/juan/movido.txt
+3. MÓDULO 3 (Informes Estadísticos)
+---------------------------------------------------------
+# Genera el informe y lo exporta a CSV
+./somonger report /home/juan --output /home/juan/informe_examen.csv
+# Para comprobar que el CSV se creó de verdad, lee el contenido:
+cat /home/juan/informe_examen.csv
+4. MÓDULO 4 (Simulador de Asignación)
+---------------------------------------------------------
+# Simular un archivo y ver las 3 particiones (EXT2, EXT4, FAT32)
+./somonger sim /home/juan/archivo_prueba.txt
+=========================================================
+ EXTRA: SI EL PROFESOR PREGUNTA CÓMO ABRIRLO NORMAL
+=========================================================
+# Para abrir el menú principal sin cargar nada
+./somonger

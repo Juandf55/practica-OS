@@ -241,6 +241,21 @@ def main():
             if no_command:
                 print_help_banner()
 
+            # ── Si es report con --output, guardar el archivo ANTES de abrir la GUI ──
+            # Así el CSV se crea siempre, aunque el usuario cierre la ventana
+            if getattr(args, 'command', None) == 'report':
+                output = getattr(args, 'output', None)
+                path   = getattr(args, 'path',   None) or os.getcwd()
+                if output:
+                    try:
+                        from modules.reporter import Reporter
+                        r = Reporter(path)
+                        r._analyze()
+                        r._export(output)
+                        print(f"\033[92m✔ Informe guardado en: {output}\033[0m")
+                    except Exception as e:
+                        print(f"\033[91m[ERROR] No se pudo guardar el informe: {e}\033[0m")
+
             # Siempre lanzar GUI, precargada con los argumentos
             try:
                 from gui.app import launch_gui

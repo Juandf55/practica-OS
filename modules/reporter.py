@@ -332,9 +332,9 @@ class Reporter:
 
         content = "\n".join(lines)
         try:
-            with open(output_path, 'w', encoding='utf-8') as f:
+            with open(path, 'w', encoding='utf-8') as f:
                 f.write(content)
-            print(cprint(f"[✓] Informe CSV exportado: {output_path}", C.GREEN))
+            print(cprint(f"[✓] Informe CSV exportado: {path}", C.GREEN))
         except Exception as e:
             print(cprint(f"[ERROR] No se pudo escribir CSV: {e}", C.RED))
 

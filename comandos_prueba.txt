@@ -1,0 +1,59 @@
+=========================================================
+ GUÍA DE PRUEBAS PARA EL EXAMEN - SOMONGER
+=========================================================
+Copia y pega estos comandos uno a uno en tu terminal.
+Asegúrate de estar primero en tu carpeta:
+cd /media/sf_Practica/practica-OS
+
+=========================================================
+1. MÓDULO 1: EXPLORADOR
+=========================================================
+./somonger explore /home/juan
+
+
+=========================================================
+2. MÓDULO 2: NAVEGADOR Y GESTIÓN DE ARCHIVOS
+=========================================================
+# (Ejecuta estos en orden para probar todo el flujo)
+
+# 1. Crea una carpeta de prueba (--touchDir crea carpetas)
+./somonger nav --touchDir /home/juan/carpeta_examen
+
+# 2. Copia un archivo a la memoria del programa (--cc)
+./somonger nav --cc /home/juan/archivo_prueba.txt
+
+# 3. Pégalo dentro de la carpeta nueva (--cv)
+./somonger nav --cv /home/juan/carpeta_examen/copia.txt
+
+# 4. Córtalo para moverlo (--cx)
+./somonger nav --cx /home/juan/carpeta_examen/copia.txt
+
+# 5. Pégalo fuera, sacándolo de la carpeta (--cv)
+./somonger nav --cv /home/juan/movido.txt
+
+# 6. Borra el archivo que hemos movido (--mk borra)
+./somonger nav --mk /home/juan/movido.txt
+
+
+=========================================================
+3. MÓDULO 3: INFORME ESTADÍSTICO
+=========================================================
+# Genera el informe Excel/CSV y ábrelo:
+./somonger report /home/juan --output /home/juan/informe_examen.csv
+
+# Comprueba que el archivo se guardó correctamente:
+cat /home/juan/informe_examen.csv
+
+
+=========================================================
+4. MÓDULO 4: SIMULADOR DE DISCO
+=========================================================
+# Simular espacio ocupado en EXT2, EXT4 y FAT32
+./somonger sim /home/juan/archivo_prueba.txt
+
+
+=========================================================
+EXTRA: INICIAR PROGRAMA NORMAL
+=========================================================
+# Para abrir la interfaz gráfica sin cargar nada:
+./somonger
