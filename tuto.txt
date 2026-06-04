@@ -1,0 +1,22 @@
+Tú nunca tocas ni modificas directamente el archivo .crypt. De hecho, tu sistema operativo y tus programas ni siquiera se enteran de que están trabajando con algo cifrado.
+
+Todo se hace a través de la carpeta punto_montaje de una forma totalmente transparente:
+
+Montas el disco con el comando de VeraCrypt y tu clave.
+
+Entras a la carpeta punto_montaje.
+
+Creas un archivo de texto, pegas una foto, o escribes un documento de Word ahí dentro de forma totalmente normal.
+
+La magia: En el milisegundo exacto en que tú guardas un archivo en esa carpeta, VeraCrypt (que está funcionando invisible en segundo plano) coge ese archivo, lo convierte en el código raro de "gt52rwedtrwe..." y lo inyecta dentro del bloque grande de mi_contenedor.crypt guardándolo en el disco duro.
+somonger explore /home/juan
+somonger nav /home/juan/
+somonger nav --dir /home/juan/
+somonger nav --rm /home/juan/archivo_prueba.txt
+somonger nav --touchDir /home/juan/nueva_carpeta
+somonger nav --mk /home/juan/nueva_carpeta
+somonger report /home/juan --output /home/juan/informe.csv
+somonger sim /media/sf_Practica/tuto.txt
+
+
+

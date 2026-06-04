@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# ============================================================
+# SOMONGER — Script de lanzamiento
+# Coloca este archivo en /usr/local/bin/somonger o en el PATH
+# y dale permisos de ejecución:
+#   chmod +x somonger
+#   sudo cp somonger /usr/local/bin/somonger
+#
+# Uso:
+#   somonger explore /home/usuario
+#   somonger nav /home/usuario/
+#   somonger nav --dir /home/usuario/
+#   somonger nav --rm /home/usuario/archivo.txt
+#   somonger nav --touchDir /home/usuario/nuevaDir
+#   somonger nav --mk /home/usuario/borrar
+#   somonger nav --cc /home/usuario/archivo
+#   somonger nav --cx /home/usuario/archivo
+#   somonger nav --cv /home/usuario/destino
+#   somonger report /home/usuario
+#   somonger report /home/usuario --output informe.csv
+#   somonger sim /home/usuario/archivo.txt
+# ============================================================
+
+# Directorio donde está el código Python de somonger
+# (directorio del propio script bash)
+SOMONGER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Verificar que Python3 está instalado
+if ! command -v python3 &>/dev/null; then
+    echo -e "\033[91m[ERROR] Python3 no está instalado.\033[0m"
+    echo "  Instala con: sudo apt install python3 python3-tk"
+    exit 1
+fi
+
+# Verificar que el archivo principal existe
+if [ ! -f "$SOMONGER_DIR/somonger.py" ]; then
+    echo -e "\033[91m[ERROR] No se encuentra somonger.py en: $SOMONGER_DIR\033[0m"
+    exit 1
+fi
+
+# Lanzar con Python3 pasando todos los argumentos
+exec python3 "$SOMONGER_DIR/somonger.py" "$@"
